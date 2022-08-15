@@ -1,4 +1,5 @@
-﻿using Discord.Interactions;
+﻿using Discord;
+using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -7,14 +8,14 @@ namespace LaundertaleDiscordBot
 {
     internal class Program
     {
-        static Task Main(string[] args) => new Program().MainAsync();
+        static Task Main() => new Program().MainAsync();
 
         public static readonly Discord.Color defaultColor = Discord.Color.Purple;
 
         #region Token & GuildID
 
         const string token = @"ODg0MTA3OTAzOTk5NTQ1NDA0.GD7EOX.DODH8C3XouHHuYOy-RwGXGDbY-1xuA66tqU2G4";
-        const ulong guildId = 909501870039519332;
+        const ulong guildId = 997081753623732236;
 
         #endregion
 
@@ -32,7 +33,11 @@ namespace LaundertaleDiscordBot
             client.Log += Log;
             client.Ready += HandleSlashCommandAsync;
 
-            await client.LoginAsync(Discord.TokenType.Bot, token);
+            await client.LoginAsync(TokenType.Bot, token);
+
+            await client.SetStatusAsync(UserStatus.AFK);
+            await client.SetGameAsync("крики маленьких девочек :3", null, ActivityType.Listening);
+
             await client.StartAsync();
 
             await Task.Delay(-1);
