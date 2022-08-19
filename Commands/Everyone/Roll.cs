@@ -1,8 +1,7 @@
 ﻿using Discord;
 using Discord.Interactions;
-using LaundertaleDiscordBot;
 
-namespace src.Modules.PublicCommands.Commands
+namespace LaundertaleDiscordBot.Commands.Everyone
 {
     public class Roll : InteractionModuleBase<SocketInteractionContext>
     {
@@ -11,8 +10,9 @@ namespace src.Modules.PublicCommands.Commands
         {
             if (Минимум > Максимум)
                 (Минимум, Максимум) = (Максимум, Минимум);
-            var random = new Random();
-            var result = random.Next(Минимум, Максимум);
+
+            var result = new Random().Next(Минимум, Максимум);
+            
             var embedBuilder = new EmbedBuilder()
                 .WithTitle($"Результат: {result}")
                 .WithColor(Program.defaultColor)

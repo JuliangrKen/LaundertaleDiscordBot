@@ -1,23 +1,21 @@
 ﻿using Discord;
 using Discord.Interactions;
-using LaundertaleDiscordBot;
 
-namespace src.Modules.PublicCommands.Commands
+namespace LaundertaleDiscordBot.Commands.Everyone
 {
     public class Coin : InteractionModuleBase<SocketInteractionContext>
     {
         [SlashCommand("coin", "орёл или решка")]
         public async Task SlashCommand()
         {
-            var result = new Random().Next(1, 100);
+            var result = new Random().Next(1, 100) > 50 ? 1 : 0;
 
-            if (result > 50) result = 1;
-            else result = 0;
-
-            string[] res = { "Вам выпал орёл!", "Вам выпала решка!" };
-            string[] url = new string[2];
-            url[0] = "https://media.discordapp.net/attachments/995650101336883241/995650130239823892/heads.png";
-            url[1] = "https://media.discordapp.net/attachments/995650101336883241/995650130537627678/tails.png";
+            var res = new string[] { "Вам выпал орёл!", "Вам выпала решка!" };
+            var url = new string[]
+            {
+                "https://media.discordapp.net/attachments/995650101336883241/995650130239823892/heads.png",
+                "https://media.discordapp.net/attachments/995650101336883241/995650130537627678/tails.png"
+            };
 
             var embedBuilder = new EmbedBuilder()
                 .WithTitle(res[result])
